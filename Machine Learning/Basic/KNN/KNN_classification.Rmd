@@ -1,0 +1,45 @@
+---
+output:
+  word_document: default
+  html_document: default
+  pdf_document: default
+---
+```{r}
+df = mtcars
+```
+
+```{r}
+head(df,5)
+```
+
+```{r}
+library(lattice)
+```
+
+```{r}
+# we want to create a model to classify the number of cylinders
+# according to the weight and mpg
+
+with(df, xyplot(wt ~ mpg, group = cyl, auto.key = T, pch = 20, cex = 3))
+```
+
+```{r}
+# for KNN we need to get the library class
+library(class)
+```
+
+```{r}
+# training the data
+train = cbind(df$mpg, df$wt)
+```
+
+```{r}
+# test data
+test = c(26,2.2)
+```
+
+```{r}
+knn(train, test, cl = df$cyl, k = 2, prob = T )
+```
+
+
